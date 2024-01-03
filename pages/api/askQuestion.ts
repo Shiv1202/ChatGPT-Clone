@@ -1,5 +1,5 @@
 
-import query from "@/utils/queryApi";
+import run from "@/utils/gemini";
 import type { NextApiRequest, NextApiResponse } from "next";
 import admin from 'firebase-admin';
 import { adminDb } from "@/firebaseAdmin";
@@ -25,7 +25,7 @@ export default async function handler(
     }
 
     // Chat GPT Query
-    const response = await query(prompt, chatId, model)
+    const response = await run(prompt)
     console.log(response)
 
     const message: Message = {
@@ -33,8 +33,8 @@ export default async function handler(
         createdAt: admin.firestore.Timestamp.now(),
         user: {
             _id: 'ChatGPT',
-            name: 'ChatGPt',
-            avatar: 'https://linkes.papareact.com/89k',
+            name: 'ChatGPT',
+            avatar: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg',
         },
     };
 
